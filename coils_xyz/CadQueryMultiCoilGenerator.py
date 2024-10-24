@@ -26,10 +26,14 @@ B = 0
 #for i in range(12):
 #    steerVecList.append(X)
 steerVecList = circVecList
+print(steerVecList[1])
 steerVecList[0] = Y
-steerVecList[5] = Y
-steerVecList[6] = Y
-steerVecList[11] = Y
+steerVecList[1] = steerVecList[1]+0.5*Y
+steerVecList[1] = steerVecList[1]/np.linalg.norm(steerVecList[1])
+print(steerVecList[0:3])
+#steerVecList[5] = Y
+#steerVecList[6] = Y
+#steerVecList[11] = Y
 xDirList, yDirList, normalList = customOrientePlanes(coilCoordList, steerVecList)
 
 #-----generate solids and associated .STEP files for the coils given in range------------------------------------------
@@ -62,7 +66,7 @@ for j in range(0,3):
         else:
             nextpart = wp1.loft(combine=True)
             result = result.union(nextpart)
-    exportname = r'C:\Users\Daniel\Documents\!Privat\Physik_Master\FusionReactorDesign\CqeditorCode\CustomCoilFat'+str(j)+'.step'
+    exportname = r'C:\Users\Daniel\Documents\!Privat\Physik_Master\FusionReactorDesign\CqeditorCode\CustomCoilvariant'+str(j)+'.step'
     cq.exporters.export(result, exportname)
 print('finished!')
 #Show object when using CQ-editor
